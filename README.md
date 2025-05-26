@@ -23,10 +23,12 @@ https://github.com/user-attachments/assets/88665bc2-a840-4eb6-9a22-749ac2401437
 
 - `Screens/`: Contains all SwiftUI view files
 - `Components/`: Reusable SwiftUI components
-- `Assets/`: App icons 
+- `Assets/`: App icons
 
 ## 🚀 Getting Started
 
 1. Clone the repo:
    ```bash
    https://github.com/laxxxx/Hike-app
+
+- A part of Robert Petras Udemy Course
