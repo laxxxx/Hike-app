@@ -8,6 +8,17 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    private let alternateAppIcons: [String] = [
+        "AppIcon-Mushroom",
+        "AppIcon-Map",
+        "AppIcon-MagnifyingGlass",
+        "AppIcon-Campfire",
+        "AppIcon-Camera",
+        "AppIcon-Backpack"
+    ]
+    
+    
     var body: some View {
         List {
             Section {
@@ -59,10 +70,99 @@ struct SettingsView: View {
             
             
             //MARK: SECTION ICONS
+            Section(header: Text("Alternate App-Icons")) {
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    
+                    HStack(spacing: 12) {
+                        ForEach(alternateAppIcons, id: \.self) { item in
+                            
+                            Button {
+                                UIApplication.shared.setAlternateIconName(item) { error in
+                                    if error != nil {
+                                        print("failed updating the app icon")
+                                    } else {
+                                        print("suceess! you have chnages the app icon to \(item)")
+                                    }
+                                }
+                                
+                            } label: {
+                                Image("\(item)-Preview")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 80, height: 80)
+                                    .cornerRadius(16)
+                            }
+                            .buttonStyle(.borderless)
+                        }
+                    }
+                }
+                .padding(.top, 12)
+                
+                Text("Choose your favourite app icon from the collection above.")
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.secondary)
+                    .font(.footnote)
+                    .padding(.top, 12)
+            }
+            .listRowSeparator(.hidden)
             
             
             
             //MARK: SECTION About
+            Section(header: Text("ABOUT THE APP"),
+                    footer: HStack {
+                Spacer()
+                Text("Copyright ©  All rights reserved.")
+                Spacer()
+            }
+                .padding(.vertical, 8)
+            ) {
+                CustomListRowView(
+                    rowLabel: "Application",
+                    rowValue: "Hike",
+                    rowIcon: "apps.iphone",
+                    rowTintColor: .blue)
+                
+                CustomListRowView(
+                    rowLabel: "Compatibility",
+                    rowValue: "iOS, iPadOS",
+                    rowIcon: "info.circle",
+                    rowTintColor: .red)
+                
+                CustomListRowView(
+                    rowLabel: "Technology",
+                    rowValue: "Swift",
+                    rowIcon: "swift",
+                    rowTintColor: .orange)
+                
+                CustomListRowView(
+                    rowLabel: "Version",
+                    rowValue: "1.0",
+                    rowIcon: "gear",
+                    rowTintColor: .purple)
+                
+                CustomListRowView(
+                    rowLabel: "Developer",
+                    rowValue: "Lakshman",
+                    rowIcon: "ellipsis.curlybraces",
+                    rowTintColor: .mint)
+                
+                CustomListRowView(
+                    rowLabel: "Designer",
+                    rowValue: "Jon Doe",
+                    rowIcon: "paintpalette",
+                    rowTintColor: .pink)
+                
+                CustomListRowView(
+                    rowLabel: "Website",
+                    rowValue: nil,
+                    rowIcon: "globe",
+                    rowTintColor: .mint,
+                    rowLinkLabel: "site",
+                    rowLinkDestination: "https://www.lipsum.com/")
+            }
             
         }
     }
